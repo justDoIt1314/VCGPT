@@ -69,18 +69,6 @@ We democratize Internet-scale data for financial large language models (FinLLMs)
 + [BloombergGPT] [BloombergGPT: A Large Language Model for Finance](https://arxiv.org/abs/2303.17564)
 + [Finextra] [ChatGPT and Bing AI to sit as panellists at fintech conference](https://www.finextra.com/newsarticle/41973/chatgpt-and-bing-ai-to-sit-as-panellists-at-fintech-conference)
 
-## ChatGPT at AI4Finance
-
-+ [YouTube video] [I Built a Trading Bot with ChatGPT](https://www.youtube.com/watch?v=fhBw3j_O9LE), combining ChatGPT and FinRL.
-+ [Hey, ChatGPT! Explain FinRL code to me!](https://medium.com/@ai4finance/hey-chatgpt-explain-finrl-code-to-me-6a91d612296f)
-+ [ChatGPT Robo Advisor v2](./VCGPT)
-+ [ChatGPT Robo Advisor v1](./demos)
-    * A demo of using ChatGPT to build a Robo-advisor 
-+ [ChatGPT Trading Agent V2](./VCGPT)
-    * A FinRL agent that trades as smartly as ChatGPT by using the large language model behind ChatGPT
-+ [ChatGPT Trading Agent V1](./VCGPT)
-    * Trade with the suggestions given by ChatGPT
-+ ChatGPT adds technical indicators into FinRL
 
 ## Introductory
 
