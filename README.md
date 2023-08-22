@@ -1,88 +1,66 @@
-# Data-Centric FinGPT: Open-source for Open Finance.
-[![Downloads](https://pepy.tech/badge/fingpt)](https://pepy.tech/project/fingpt)
-[![Downloads](https://pepy.tech/badge/fingpt/week)](https://pepy.tech/project/fingpt)
+# Data-Centric VCGPT: Open-source for Open Finance.
+[![Downloads](https://pepy.tech/badge/VCGPT)](https://pepy.tech/project/VCGPT)
+[![Downloads](https://pepy.tech/badge/VCGPT/week)](https://pepy.tech/project/VCGPT)
 [![Python 3.8](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
-[![PyPI](https://img.shields.io/pypi/v/fingpt.svg)](https://pypi.org/project/fingpt/)
-![License](https://img.shields.io/github/license/AI4Finance-Foundation/fingpt.svg?color=brightgreen)
-
-
-<div align="center">
-<img align="center" src=figs/logo_transparent_background.png width="40%"/>
-</div>
+[![PyPI](https://img.shields.io/pypi/v/VCGPT.svg)](https://pypi.org/project/VCGPT/)
+![License](https://img.shields.io/github/license/AI4Finance-Foundation/VCGPT.svg?color=brightgreen)
 
 Let us DO NOT expect Wall Street to open-source LLMs nor open APIs, due to FinTech institutes' internal regulations and policies.
 
-We democratize Internet-scale data for financial large language models (FinLLMs) at [FinNLP](https://github.com/AI4Finance-Foundation/FinNLP) and [FinNLP Website](https://ai4finance-foundation.github.io/FinNLP/) 
+We democratize Internet-scale data for financial large language models (FinLLMs) at [VCNLP](https://github.com/AI4Finance-Foundation/VCNLP) and [VCNLP Website](https://ai4finance-foundation.github.io/VCNLP/) 
 
-[Blueprint of FinGPT](https://arxiv.org/abs/2306.06031)
+[Blueprint of VCGPT](https://arxiv.org/abs/2306.06031)
 
 **Disclaimer: We are sharing codes for academic purposes under the MIT education license. Nothing herein is financial advice, and NOT a recommendation to trade real money. Please use common sense and always first consult a professional before trading or investing.**
 
+## Why VCGPT?
 
-[![](https://dcbadge.vercel.app/api/server/sGB9CQ5M)](https://discord.gg/sGB9CQ5M)
+1). Finance is highly dynamic. [BloombergGPT](https://arxiv.org/abs/2303.17564) retrains an LLM using a mixed dataset of finance and general data sources, which is too expensive (1.3M GPU hours, a cost of around **$5M**). It is costly to retrain an LLM model every month or every week, so lightweight adaptation is highly favorable in finance. Instead of undertaking a costly and time-consuming process of retraining a model from scratch with every significant change in the financial landscape, VCGPT can be fine-tuned swiftly to align with new data (the cost of adaptation falls significantly, estimated at less than **$416 per training**).
 
-
-
-## Why FinGPT?
-
-1). Finance is highly dynamic. [BloombergGPT](https://arxiv.org/abs/2303.17564) retrains an LLM using a mixed dataset of finance and general data sources, which is too expensive (1.3M GPU hours, a cost of around **$5M**). It is costly to retrain an LLM model every month or every week, so lightweight adaptation is highly favorable in finance. Instead of undertaking a costly and time-consuming process of retraining a model from scratch with every significant change in the financial landscape, FinGPT can be fine-tuned swiftly to align with new data (the cost of adaptation falls significantly, estimated at less than **$416 per training**).
-
-2). Democratizing Internet-scale financial data is critical, which should allow timely updates (monthly or weekly updates) using an automatic data curation pipeline. But, BloombergGPT has privileged data access and APIs. FinGPT presents a more accessible alternative. It prioritizes lightweight adaptation, leveraging the strengths of some of the best available open-source LLMs, which are then fed with financial data and fine-tuned for financial language modeling.
+2). Democratizing Internet-scale financial data is critical, which should allow timely updates (monthly or weekly updates) using an automatic data curation pipeline. But, BloombergGPT has privileged data access and APIs. VCGPT presents a more accessible alternative. It prioritizes lightweight adaptation, leveraging the strengths of some of the best available open-source LLMs, which are then fed with financial data and fine-tuned for financial language modeling.
 
 3). The key technology is "RLHF (Reinforcement learning from human feedback)", which is missing in BloombergGPT. RLHF enables an LLM model to learn individual preferences (risk-aversion level, investing habits, personalized robo-advisor, etc.), which is the "secret" ingredient of ChatGPT and GPT4.
 
-## FinGPT Demos
-* [FinGPT V3 (Updated on 8/4/2023)](./fingpt)
-  
-  + **FinGPT v3 series are LLMs finetuned with LoRA method on the News and Tweets sentiment analysis dataset which achieve best scores on most of the financial sentiment analysis datasets.**
-  + FinGPT v3.1 uses chatglm2-6B as base model; FinGPT v3.2 uses llama2-7b as base model
-  + Benchmark Results:
-    | Weighted F1   | [BloombergGPT](https://arxiv.org/abs/2303.17564) | [ChatGLM2](https://github.com/THUDM/ChatGLM2-6B) |  [Llama2](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf) |[FinGPT v3.1](https://huggingface.co/oliverwang15/FinGPT_v31_ChatGLM2_Sentiment_Instruction_LoRA_FT) |v3.1.1 (8bit)|v3.1.2 (QLoRA)| [FinGPT v3.2](https://huggingface.co/oliverwang15/FinGPT_v32_Llama2_Sentiment_Instruction_LoRA_FT) |
-    | ---------------------- | ------------ | -------- | ---------------- | --------- | ----------------- | ----------------- |----------------- |
-    | FPB       | 0.511        | 0.381      | 0.390      | **0.855**      | 0.855           |  0.777          | 0.850          |
-    | FiQA-SA   | 0.751        | 0.790      | 0.800      | 0.850          | 0.847            | 0.752      |**0.860**      |
-    | TFNS      | -            | 0.189      | 0.296      | 0.875          | 0.879           | 0.828       |**0.894**        |
-    | NWGI      | -            | 0.449      | 0.503      | **0.642**      | 0.632            |0.583            |0.636            |
-    | Devices   | 512 × A100   | 64 × A100  |  2048 × A100     |  A100     | A100    | A100        |A100        |
-    | Time      | 53 days      | 2.5 days   |  21 days     |  2.36 hours      | 6.47 hours    |   4.15 hours        | 2.47 hours        |   
-    | Cost      | $2.67 million      | $ 14,976   |  $4.23 million    |  $262.4      | $212.2     |  $136.12     |  $262.4     | 
-**Cost per GPU hour.** For A100 GPUs, the AWS p4d.24xlarge instance, equipped with 8 A100 GPUs is used as a benchmark to estimate the costs. Note that BloombergGPT also used p4d.24xlarge As of July 11, 2023, the hourly rate for this instance stands at $32.773. Consequently, the estimated cost per GPU hour comes to $32.77 divided by 8, resulting in approximately **$4.10**. With this value as the reference unit price (1 GPU hour). **BloombergGPT estimated cost= 512 x 53 x 24 = 651,264 GPU hours x $4.10 = $2,670,182.40**
+## VCGPT Demos
+* [VCGPT V3 (Updated on 7/11/2023)](./VCGPT)
+  + **VCGPT v3 [(VCGPT_ChatGLM2_Sentiment_Instruction_LoRA_FT)](https://huggingface.co/oliverwang15/VCGPT_ChatGLM2_Sentiment_Instruction_LoRA_FT) is a LLM finetuned with LoRA method on the News and Tweets sentiment analysis dataset which achieve best scores on most of the financial sentiment analysis datasets.**
+  + Benchmark Results: 
+    | Weighted F1   | BloombergGPT | ChatGLM2 | ChatGLM2 (8-bit) | VCGPT v3 | VCGPT v3 (8-bit) |
+    | ---------------------- | ------------ | -------- | ---------------- | --------- | ----------------- |
+    | FPB  | 0.511        | 0.381    | 0.398            | **0.795** | 0.778             |
+    | FiQA-SA   | 0.751        | 0.79     | 0.801            | **0.806** | 0.801             |
+    | TFNS   | -            | 0.189    | 0.19             | **0.74**  | 0.721             |
+    | NWGI   | - | 0.449    | 0.452            | **0.578** | **0.578**         |
 
-  * Reproduce the results by running [benchmarks](./fingpt/FinGPT-v3/benchmark/benchmarks.ipynb), and the detailed tutorial is on the way.
-  * Finetune your own FinGPT v3 model with the LoRA method on only an RTX 3090 with this [notebook](./fingpt/FinGPT-v3/training_8bit/train.ipynb) in 8bit or this [notebook](./fingpt/FinGPT-v3/training_int4/train.ipynb) in int4 (QLoRA)
-  
-* [FinGPT V2](./fingpt)
-  + **Let's train our own FinGPT in American Financial Market with LLaMA and LoRA  (Low-Rank Adaptation)**
-* [FinGPT V1](./fingpt)
-  + **Let's train our own FinGPT in Chinese Financial Market with ChatGLM and LoRA (Low-Rank Adaptation)**
+* [VCGPT V2](./VCGPT)
+  + **Let's train our own VCGPT in American Financial Market with LLaMA and LoRA  (Low-Rank Adaptation)**
+* [VCGPT V1](./VCGPT)
+  + **Let's train our own VCGPT in Chinese Financial Market with ChatGLM and LoRA (Low-Rank Adaptation)**
 
-## Understanding FinGPT: An Educational Blog Series
-+ [FinGPT: Powering the Future of Finance with 20 Cutting-Edge Applications
-](https://medium.datadriveninvestor.com/fingpt-powering-the-future-of-finance-with-20-cutting-edge-applications-7c4d082ad3d8)
-+ [FinGPT I: Why We Built the First Open-Source Large Language Model for Finance
-](https://medium.datadriveninvestor.com/fingpt-i-why-we-built-the-first-open-source-large-language-model-for-finance-c01b5517ca)
-+ [FinGPT II: Cracking the Financial Sentiment Analysis Task Using Instruction Tuning of General-Purpose Large Language Models
-](https://medium.datadriveninvestor.com/fingpt-ii-cracking-the-financial-sentiment-analysis-task-using-instruction-tuning-of-3333bce428c4)
+## Understanding VCGPT: An Educational Blog Series
++ [VCGPT: Powering the Future of Finance with 20 Cutting-Edge Applications
+](https://medium.datadriveninvestor.com/VCGPT-powering-the-future-of-finance-with-20-cutting-edge-applications-7c4d082ad3d8)
++ [VCGPT I: Why We Built the First Open-Source Large Language Model for Finance
+](https://medium.datadriveninvestor.com/VCGPT-i-why-we-built-the-first-open-source-large-language-model-for-finance-c01b5517ca)
 
+## What is VCGPT and VCNLP?
 
-## What is FinGPT and FinNLP?
-
-### The Goals of FinGPT
-1. Real-time data curation pipeline to **democratize data** for FinGPT 
-2. Lightweight adaptation to **democratize the FinGPT model** for both individuals and institutes (frequent updates)
+### The Goals of VCGPT
+1. Real-time data curation pipeline to **democratize data** for VCGPT 
+2. Lightweight adaptation to **democratize the VCGPT model** for both individuals and institutes (frequent updates)
 3. Support various **financial applications**
 
-* FinNLP provides a playground for all people interested in LLMs and NLP in Finance. Here we provide full pipelines for LLM training and finetuning in the field of finance. The full architecture is shown in the following picture. Detail codes and introductions can be found [here](https://github.com/AI4Finance-Foundation/FinNLP). Or you may refer to the [wiki](https://ai4finance-foundation.github.io/FinNLP/)
+* VCNLP provides a playground for all people interested in LLMs and NLP in Finance. Here we provide full pipelines for LLM training and finetuning in the field of finance. The full architecture is shown in the following picture. Detail codes and introductions can be found [here](https://github.com/AI4Finance-Foundation/VCNLP). Or you may refer to the [wiki](https://ai4finance-foundation.github.io/VCNLP/)
 
 <div align="center">
-<img align="center" src=figs/FinGPT_framework.png>
+<img align="center" src=figs/VCGPT_framework.png>
 </div>
 
-## End-to-end framework: FinGPT embraces a full-stack framework for FinLLMs with four layers:
+## End-to-end framework: VCGPT embraces a full-stack framework for FinLLMs with four layers:
 * **Data source layer**: This layer assures comprehensive market coverage, addressing the temporal sensitivity of financial data through real-time information capture.
 * **Data engineering layer**: Primed for real-time NLP data processing, this layer tackles the inherent challenges of high temporal sensitivity and low signal-to-noise ratio in financial data.
 * **LLMs layer**: Focusing on a range of fine-tuning methodologies such as LoRA, this layer mitigates the highly dynamic nature of financial data, ensuring the model’s relevance and accuracy.
-* **Application layer**: Showcasing practical applications and demos, this layer highlights the potential capability of FinGPT in the financial sector.
+* **Application layer**: Showcasing practical applications and demos, this layer highlights the potential capability of VCGPT in the financial sector.
 
 ## News
 
@@ -95,12 +73,12 @@ We democratize Internet-scale data for financial large language models (FinLLMs)
 
 + [YouTube video] [I Built a Trading Bot with ChatGPT](https://www.youtube.com/watch?v=fhBw3j_O9LE), combining ChatGPT and FinRL.
 + [Hey, ChatGPT! Explain FinRL code to me!](https://medium.com/@ai4finance/hey-chatgpt-explain-finrl-code-to-me-6a91d612296f)
-+ [ChatGPT Robo Advisor v2](./fingpt)
++ [ChatGPT Robo Advisor v2](./VCGPT)
 + [ChatGPT Robo Advisor v1](./demos)
     * A demo of using ChatGPT to build a Robo-advisor 
-+ [ChatGPT Trading Agent V2](./fingpt)
++ [ChatGPT Trading Agent V2](./VCGPT)
     * A FinRL agent that trades as smartly as ChatGPT by using the large language model behind ChatGPT
-+ [ChatGPT Trading Agent V1](./fingpt)
++ [ChatGPT Trading Agent V1](./VCGPT)
     * Trade with the suggestions given by ChatGPT
 + ChatGPT adds technical indicators into FinRL
 
@@ -125,7 +103,7 @@ We democratize Internet-scale data for financial large language models (FinLLMs)
 
 + [FinRL-Meta Repo](https://github.com/AI4Finance-Foundation/FinRL-Meta) and paper [FinRL-Meta: Market Environments and Benchmarks for Data-Driven Financial Reinforcement Learning](https://proceedings.neurips.cc/paper_files/paper/2022/hash/0bf54b80686d2c4dc0808c2e98d430f7-Abstract-Datasets_and_Benchmarks.html). Advances in Neural Information Processing Systems, 2022.
 
-+ [AI4Finance] [FinNLP](https://github.com/AI4Finance-Foundation/FinNLP) Democratizing Internet-scale financial data.
++ [AI4Finance] [VCNLP](https://github.com/AI4Finance-Foundation/VCNLP) Democratizing Internet-scale financial data.
 
 ## Interesting Demos
 
@@ -142,7 +120,7 @@ We democratize Internet-scale data for financial large language models (FinLLMs)
 + [YouTube video] [ChatGPT: Your Crypto Assistant](https://www.youtube.com/watch?v=LpzeshX6s2w)
 + [YouTube video] [Generate Insane Trading Returns with ChatGPT and TradingView](https://www.youtube.com/watch?v=ekz6ugJE1h0&t=3s)
 
-<!--- 
+
 **(Fast and accurate) Sentiment Analysis**
 
    GPT-3 can help study customer surveys, social media tweets from customers/users.
@@ -203,16 +181,6 @@ Interesting evaluations:
 on Reasoning, Hallucination, and Interactivity](https://arxiv.org/pdf/2302.04023.pdf)
 
 [YouTube video] [Physics Solution: ChatGPT vs. Google](https://www.youtube.com/watch?v=x4dIx9VYQoM)
----> 
-## Citing FinGPT
-```
-@article{yang2023fingpt,
-  title={FinGPT: Open-Source Financial Large Language Models},
-  author={Yang, Hongyang and Liu, Xiao-Yang and Wang, Christina Dan},
-  journal={FinLLM Symposium at IJCAI 2023},
-  year={2023}
-}
-```
 
 ## Links
 
